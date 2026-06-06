@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Уравнения | qmath.kg</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=JetBrains+Mono:wght@400;600&family=Mulish:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0a0e1a;
+  --navy2: #111827;
+  --card: #141c2e;
+  --gold: #f5c842;
+  --gold2: #e6a800;
+  --teal: #00d4aa;
+  --rose: #ff6b8a;
+  --purple: #a78bfa;
+  --text: #e8eaf0;
+  --muted: #8892a4;
+  --border: rgba(245,200,66,0.18);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'Mulish', sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 80px 24px 60px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0d1428 0%, #0a0e1a 60%, #12091f 100%);
+}
+.hero::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(245,200,66,0.10) 0%, transparent 70%);
+  pointer-events:none;
+}
+.hero-brand {
+  font-family:'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #f5c842 0%, #ffe57f 50%, #e6a800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+.hero p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 560px;
+  margin: 0 auto 36px;
+}
+.hero-tags {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  margin-bottom: 44px;
+}
+.hero-tag {
+  background: rgba(245,200,66,0.1);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 0.82rem;
+  color: var(--gold);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── NAV ── */
+.nav-tabs {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  padding: 0 16px 48px;
+  position: sticky; top:0; z-index:100;
+  background: rgba(10,14,26,0.95);
+  backdrop-filter: blur(12px);
+  padding-top: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.nav-btn {
+  background: transparent;
+  border: 1px solid rgba(245,200,66,0.25);
+  border-radius: 8px;
+  color: var(--muted);
+  font-family: 'Mulish', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.3px;
+}
+.nav-btn:hover, .nav-btn.active {
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+/* ── SECTION ── */
+.section { display:none; padding: 40px 16px 80px; max-width: 900px; margin: 0 auto; }
+.section.active { display: block; }
+
+.section-header {
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.section-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: #fff;
+  margin-bottom: 10px;
+}
+.section-header p { color: var(--muted); font-size: 0.95rem; max-width: 640px; }
+
+/* ── THEORY BOX ── */
+.theory-box {
+  background: linear-gradient(135deg, rgba(20,28,46,0.95) 0%, rgba(16,22,38,0.95) 100%);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.theory-box::before {
+  content:'';
+  position:absolute; top:0; right:0;
+  width:120px; height:120px;
+  background: radial-gradient(circle, rgba(245,200,66,0.06) 0%, transparent 70%);
+}
+.theory-box h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.theory-box .formula {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: #ffe57f;
+  margin: 10px 0;
+  border: 1px solid rgba(245,200,66,0.12);
+  line-height: 1.9;
+}
+.theory-box ul { padding-left: 20px; color: var(--text); }
+.theory-box ul li { margin-bottom: 6px; font-size: 0.92rem; }
+.theory-box ul li span { color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+
+/* ── SUBSECTION TITLES ── */
+.subsec {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: #fff;
+  margin: 36px 0 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.subsec::before {
+  content:'';
+  display:block; width:28px; height:2px;
+  background: var(--gold);
+  flex-shrink:0;
+}
+
+/* ── DIFFICULTY BADGES ── */
+.diff {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 1px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-left: 6px;
+  text-transform: uppercase;
+}
+.diff-easy { background: rgba(0,212,170,0.15); color: var(--teal); border: 1px solid rgba(0,212,170,0.3);}
+.diff-med { background: rgba(245,200,66,0.15); color: var(--gold); border: 1px solid rgba(245,200,66,0.3);}
+.diff-hard { background: rgba(255,107,138,0.15); color: var(--rose); border: 1px solid rgba(255,107,138,0.3);}
+
+/* ── PROBLEM CARD ── */
+.problem-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.problem-card:hover { border-color: rgba(245,200,66,0.25); transform: translateX(2px); }
+.problem-top {
+  display: flex; align-items: flex-start; gap: 14px;
+}
+.prob-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  min-width: 32px;
+  padding-top: 2px;
+}
+.prob-text {
+  flex: 1;
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.prob-text .eq {
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffe57f;
+  font-size: 1.02rem;
+}
+.show-btn {
+  background: transparent;
+  border: 1px solid rgba(245,200,66,0.3);
+  border-radius: 7px;
+  color: var(--gold);
+  font-size: 0.76rem;
+  font-family: 'JetBrains Mono', monospace;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.show-btn:hover { background: var(--gold); color: var(--navy); }
+.solution-box {
+  display: none;
+  margin-top: 16px;
+  padding: 16px 18px;
+  background: rgba(0,0,0,0.25);
+  border-radius: 10px;
+  border-left: 2px solid var(--teal);
+}
+.solution-box.open { display: block; animation: fadeIn 0.3s ease; }
+.solution-box .sol-title {
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 3px;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.solution-box .sol-step {
+  font-size: 0.88rem;
+  color: var(--text);
+  margin-bottom: 8px;
+  padding-left: 12px;
+  position: relative;
+}
+.solution-box .sol-step::before {
+  content:'→';
+  position:absolute; left:0;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.solution-box .sol-step .eq {
+  font-family: 'JetBrains Mono', monospace;
+  color: #ffe57f;
+  font-size: 0.9rem;
+}
+.solution-box .answer {
+  margin-top: 12px;
+  padding: 8px 14px;
+  background: rgba(0,212,170,0.1);
+  border: 1px solid rgba(0,212,170,0.25);
+  border-radius: 7px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  color: var(--teal);
+}
+
+@keyframes fadeIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+
+/* ── TEST ── */
+.test-header {
+  background: linear-gradient(135deg, rgba(167,139,250,0.1) 0%, rgba(167,139,250,0.03) 100%);
+  border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+  display: flex; align-items: center; gap: 18px;
+}
+.test-icon {
+  font-size: 2.2rem;
+  flex-shrink:0;
+}
+.test-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+.test-header p { color: var(--muted); font-size: 0.85rem; }
+
+.test-question {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s;
+}
+.test-question.correct { border-color: rgba(0,212,170,0.5); }
+.test-question.wrong { border-color: rgba(255,107,138,0.5); }
+.q-text {
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+.q-text .eq { font-family:'JetBrains Mono',monospace; color:#ffe57f; }
+.q-num {
+  font-family:'JetBrains Mono',monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text);
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+}
+.option:hover:not(:disabled) { background: rgba(245,200,66,0.08); border-color: rgba(245,200,66,0.3); }
+.option.correct-ans { background: rgba(0,212,170,0.15); border-color: var(--teal); color: var(--teal); }
+.option.wrong-ans { background: rgba(255,107,138,0.1); border-color: var(--rose); color: var(--rose); }
+.option:disabled { cursor: default; }
+
+.test-controls {
+  margin-top: 28px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-weight: 700;
+  font-family: 'Mulish', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+.btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-family: 'Mulish', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+.score-box {
+  display: none;
+  margin-top: 20px;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.score-box.show { display: block; animation: fadeIn 0.4s ease; }
+.score-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  color: var(--gold);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.score-msg { color: var(--muted); font-size: 0.95rem; margin-bottom: 16px; }
+.score-bar-wrap { background: rgba(255,255,255,0.06); border-radius: 6px; height: 8px; margin: 16px 0; }
+.score-bar { height: 8px; border-radius: 6px; background: linear-gradient(90deg, var(--teal), var(--gold)); transition: width 0.8s ease; }
+
+/* ── BONUS SECTION ── */
+.bonus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 32px; }
+.bonus-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 22px;
+  transition: all 0.2s;
+}
+.bonus-card:hover { border-color: var(--border); transform: translateY(-2px); }
+.bonus-card-icon { font-size: 1.8rem; margin-bottom: 12px; display: block; }
+.bonus-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.bonus-card p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+
+.mistake-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.mistake-list li {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--rose);
+  font-size: 0.88rem;
+}
+.mistake-list li .mistake-title { color: var(--rose); font-weight: 700; margin-bottom: 4px; font-size: 0.82rem; font-family:'JetBrains Mono',monospace; }
+.mistake-list li .mistake-desc { color: var(--muted); }
+.mistake-list li .mistake-fix { color: var(--teal); margin-top: 4px; font-size: 0.82rem; }
+
+.cheatsheet {
+  background: linear-gradient(135deg, rgba(20,28,46,0.98) 0%, rgba(18,22,36,0.98) 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 28px;
+}
+.cheatsheet h3 { font-family:'Playfair Display',serif; color: var(--gold); margin-bottom: 18px; font-size: 1.1rem; }
+.cs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cs-item {
+  background: rgba(0,0,0,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.cs-item .cs-key { font-family:'JetBrains Mono',monospace; color: #ffe57f; font-size: 0.82rem; margin-bottom: 4px; }
+.cs-item .cs-val { color: var(--muted); font-size: 0.78rem; }
+
+.progress-tracker {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.progress-tracker h3 { font-family:'Playfair Display',serif; color:#fff; margin-bottom: 16px; font-size: 1rem; }
+.pt-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.pt-label { color: var(--muted); font-size: 0.85rem; }
+.pt-bar-wrap { flex:1; margin: 0 16px; background: rgba(255,255,255,0.05); border-radius: 4px; height: 6px; }
+.pt-bar { height: 6px; border-radius: 4px; transition: width 0.6s; }
+.pt-count { font-family:'JetBrains Mono',monospace; font-size: 0.78rem; color: var(--gold); }
+
+@media(max-width:600px) {
+  .cs-grid { grid-template-columns: 1fr; }
+  .theory-box { padding: 18px; }
+  .problem-card { padding: 16px; }
+  .problem-top { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-brand">qmath.kg · интерактивный урок</div>
+  <h1>Три типа уравнений</h1>
+  <p>Логарифмические, иррациональные и дробно-рациональные уравнения — полный курс с задачами и тестами</p>
+  <div class="hero-tags">
+    <span class="hero-tag">20 задач × 3 темы</span>
+    <span class="hero-tag">3 теста по 10 вопросов</span>
+    <span class="hero-tag">Решения скрыты</span>
+    <span class="hero-tag">Бонус: типичные ошибки</span>
+  </div>
+</div>
+
+<div class="nav-tabs" id="navTabs">
+  <button class="nav-btn active" onclick="showSection('log')">📐 Логарифмические</button>
+  <button class="nav-btn" onclick="showSection('irr')">√ Иррациональные</button>
+  <button class="nav-btn" onclick="showSection('frac')">⅔ Дробно-рациональные</button>
+  <button class="nav-btn" onclick="showSection('test-log')">✏️ Тест: Лог.</button>
+  <button class="nav-btn" onclick="showSection('test-irr')">✏️ Тест: Ирр.</button>
+  <button class="nav-btn" onclick="showSection('test-frac')">✏️ Тест: Дроб.</button>
+  <button class="nav-btn" onclick="showSection('bonus')">⭐ Бонус</button>
+</div>
+
+<!-- ═══════════════════════════════════════
+  SECTION 1: ЛОГАРИФМИЧЕСКИЕ
+═══════════════════════════════════════ -->
+<div class="section active" id="sec-log">
+  <div class="section-header">
+    <span class="section-tag">Тема 01</span>
+    <h2>Логарифмические уравнения</h2>
+    <p>Уравнения, содержащие логарифм неизвестного. Ключевой метод — потенцирование и проверка ОДЗ.</p>
+  </div>
+
+  <div class="theory-box">
+    <h3>📖 Основные формулы и методы</h3>
+    <div class="formula">
+log_a(f(x)) = log_a(g(x))  →  f(x) = g(x),  при f(x)&gt;0, g(x)&gt;0, a&gt;0, a≠1
+
+log_a(f(x)) = b  →  f(x) = a^b
+
+Формулы логарифмов:
+  log_a(mn) = log_a(m) + log_a(n)
+  log_a(m/n) = log_a(m) − log_a(n)
+  log_a(m^n) = n·log_a(m)
+  log_a(b) = log_c(b) / log_c(a)  [формула перехода]
+    </div>
+    <ul>
+      <li>⚠️ ОДЗ: аргумент логарифма должен быть <span>&gt; 0</span></li>
+      <li>Метод 1: <span>потенцирование</span> (если основания одинаковы)</li>
+      <li>Метод 2: <span>замена переменной</span> (t = log_a(x))</li>
+      <li>Метод 3: <span>логарифмирование обеих частей</span></li>
+    </ul>
+  </div>
+
+  <div class="subsec">Лёгкий уровень (1–7)</div>
+
+  <div id="log-problems"></div>
+
+  <div class="subsec">Средний уровень (8–14)</div>
+  <div id="log-problems-med"></div>
+
+  <div class="subsec">Сложный уровень (15–20)</div>
+  <div id="log-problems-hard"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  SECTION 2: ИРРАЦИОНАЛЬНЫЕ
+═══════════════════════════════════════ -->
+<div class="section" id="sec-irr">
+  <div class="section-header">
+    <span class="section-tag">Тема 02</span>
+    <h2>Иррациональные уравнения</h2>
+    <p>Уравнения с переменной под знаком корня. Метод — возведение в степень с обязательной проверкой.</p>
+  </div>
+
+  <div class="theory-box">
+    <h3>📖 Основные методы решения</h3>
+    <div class="formula">
+√f(x) = g(x)  →  { f(x) = [g(x)]²,  g(x) ≥ 0 }
+
+√f(x) = √g(x)  →  f(x) = g(x)  при  f(x) ≥ 0
+
+ⁿ√f(x) = g(x)  →  f(x) = [g(x)]ⁿ
+  (если n чётное: g(x) ≥ 0; если n нечётное: любое g(x))
+    </div>
+    <ul>
+      <li>⚠️ ОДЗ: подкоренное выражение <span>≥ 0</span> (при чётном корне)</li>
+      <li>⚠️ После возведения в степень — <span>ВСЕГДА проверка</span></li>
+      <li>Метод: изолировать корень, возвести в степень, решить, проверить</li>
+      <li>Метод замены: <span>t = √f(x)</span>, t ≥ 0</li>
+    </ul>
+  </div>
+
+  <div class="subsec">Лёгкий уровень (1–7)</div>
+  <div id="irr-problems"></div>
+
+  <div class="subsec">Средний уровень (8–14)</div>
+  <div id="irr-problems-med"></div>
+
+  <div class="subsec">Сложный уровень (15–20)</div>
+  <div id="irr-problems-hard"></div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  SECTION 3: ДРОБНО-РАЦИОНАЛЬНЫЕ
+═══════════════════════════════════════ -->
+<div class="section" id="sec-frac">
+  <div class="section-header">
+    <span class="section-tag">Тема 03</span>
+    <h2>Дробно-рациональные уравнения</h2>
+    <p>Уравнения, содержащие переменную в знаменателе. Главное — исключить значения, обнуляющие знаменатель.</p>
+  </div>
+
+  <div class="theory-box">
+    <h3>📖 Метод решения</h3>
+    <div class="formula">
+P(x)/Q(x) = R(x)/S(x)
+
+Шаг 1: Найти ОДЗ — все x, при которых Q(x) ≠ 0, S(x) ≠ 0
+Шаг 2: Умножить обе части на НОК знаменателей
+Шаг 3: Решить полученное целое уравнение
+Шаг 4: Проверить, не входят ли корни в исключённые значения
+    </div>
+    <ul>
+      <li>⚠️ ОДЗ: все значения, при которых знаменатели <span>≠ 0</span></li>
+      <li>Посторонние корни могут появиться — <span>проверка обязательна</span></li>
+      <li>Метод: приведение к общему знаменателю</li>
+    </ul>
+  </div>
+
+  <div class="subsec">Лёгкий уровень (1–7)</div>
+  <div id="frac-problems"></div>
+
+  <div class="subsec">Средний уровень (8–14)</div>
+  <div id="frac-problems-med"></div>
+
+  <div class="subsec">Сложный уровень (15–20)</div>
+  <div id="frac-problems-hard"></div>
+</div>
+
+<!-- ТЕСТЫ -->
+<div class="section" id="sec-test-log">
+  <div class="section-header">
+    <span class="section-tag">Тест 01</span>
+    <h2>Тест: Логарифмические уравнения</h2>
+  </div>
+  <div class="test-header">
+    <div class="test-icon">📝</div>
+    <div>
+      <h3>Проверь себя!</h3>
+      <p>10 вопросов · Выбери правильный ответ · Результат сразу</p>
+    </div>
+  </div>
+  <div id="test-log-container"></div>
+  <div class="test-controls">
+    <button class="btn-primary" onclick="submitTest('log')">Проверить</button>
+    <button class="btn-secondary" onclick="resetTest('log')">Сбросить</button>
+  </div>
+  <div class="score-box" id="score-log">
+    <span class="score-num" id="score-log-num">0/10</span>
+    <div class="score-msg" id="score-log-msg"></div>
+    <div class="score-bar-wrap"><div class="score-bar" id="score-log-bar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="section" id="sec-test-irr">
+  <div class="section-header">
+    <span class="section-tag">Тест 02</span>
+    <h2>Тест: Иррациональные уравнения</h2>
+  </div>
+  <div class="test-header">
+    <div class="test-icon">📝</div>
+    <div>
+      <h3>Проверь себя!</h3>
+      <p>10 вопросов · Выбери правильный ответ · Результат сразу</p>
+    </div>
+  </div>
+  <div id="test-irr-container"></div>
+  <div class="test-controls">
+    <button class="btn-primary" onclick="submitTest('irr')">Проверить</button>
+    <button class="btn-secondary" onclick="resetTest('irr')">Сбросить</button>
+  </div>
+  <div class="score-box" id="score-irr">
+    <span class="score-num" id="score-irr-num">0/10</span>
+    <div class="score-msg" id="score-irr-msg"></div>
+    <div class="score-bar-wrap"><div class="score-bar" id="score-irr-bar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<div class="section" id="sec-test-frac">
+  <div class="section-header">
+    <span class="section-tag">Тест 03</span>
+    <h2>Тест: Дробно-рациональные уравнения</h2>
+  </div>
+  <div class="test-header">
+    <div class="test-icon">📝</div>
+    <div>
+      <h3>Проверь себя!</h3>
+      <p>10 вопросов · Выбери правильный ответ · Результат сразу</p>
+    </div>
+  </div>
+  <div id="test-frac-container"></div>
+  <div class="test-controls">
+    <button class="btn-primary" onclick="submitTest('frac')">Проверить</button>
+    <button class="btn-secondary" onclick="resetTest('frac')">Сбросить</button>
+  </div>
+  <div class="score-box" id="score-frac">
+    <span class="score-num" id="score-frac-num">0/10</span>
+    <div class="score-msg" id="score-frac-msg"></div>
+    <div class="score-bar-wrap"><div class="score-bar" id="score-frac-bar" style="width:0%"></div></div>
+  </div>
+</div>
+
+<!-- БОНУС -->
+<div class="section" id="sec-bonus">
+  <div class="section-header">
+    <span class="section-tag">Бонус</span>
+    <h2>Полезные материалы</h2>
+    <p>Шпаргалки, типичные ошибки и советы по решению экзаменационных задач ОРТ/НЦТ</p>
+  </div>
+
+  <div class="bonus-grid">
+    <div class="bonus-card">
+      <span class="bonus-card-icon">⚡</span>
+      <h4>Скорость vs точность</h4>
+      <p>На ОРТ/НЦТ лучше сначала решить лёгкие задачи, заработать баллы, а потом вернуться к сложным. Не застревай на одном уравнении дольше 3 минут.</p>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-card-icon">🎯</span>
+      <h4>Метод подстановки</h4>
+      <p>Если не умеешь решать аналитически — подставь варианты ответа (из теста) в уравнение. Быстрее, чем кажется!</p>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-card-icon">🔍</span>
+      <h4>ОДЗ — всегда первым</h4>
+      <p>Запиши ОДЗ до начала решения. Так ты сразу видишь, какие ответы заведомо лишние, и не тратишь время на их проверку.</p>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-card-icon">📊</span>
+      <h4>Формула перехода логарифмов</h4>
+      <p>log₅(25) = ln(25)/ln(5) — используй, когда основания разные. На калькуляторе это можно проверить мгновенно.</p>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-card-icon">🌱</span>
+      <h4>Иррациональные: 2 условия</h4>
+      <p>√f(x) = g(x) всегда даёт два условия: f(x) = [g(x)]² И g(x) ≥ 0. Если второе условие не выполнено — корень лишний.</p>
+    </div>
+    <div class="bonus-card">
+      <span class="bonus-card-icon">🧮</span>
+      <h4>Замена переменной — твой друг</h4>
+      <p>В сложных логарифмических уравнениях введи t = log_a(x). Квадратное уравнение относительно t часто решается проще.</p>
+    </div>
+  </div>
+
+  <h3 class="subsec">Шпаргалка: формулы за 2 минуты</h3>
+  <div class="cheatsheet">
+    <h3>🗂 Все ключевые формулы</h3>
+    <div class="cs-grid">
+      <div class="cs-item">
+        <div class="cs-key">log_a(a) = 1</div>
+        <div class="cs-val">Логарифм числа по своему основанию</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">log_a(1) = 0</div>
+        <div class="cs-val">Логарифм единицы всегда равен 0</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">a^(log_a(x)) = x</div>
+        <div class="cs-val">Основное тождество логарифма</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">log_a(b·c) = log_a(b)+log_a(c)</div>
+        <div class="cs-val">Логарифм произведения</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">log_a(b^n) = n·log_a(b)</div>
+        <div class="cs-val">Логарифм степени</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">√(x²) = |x|, не x!</div>
+        <div class="cs-val">Корень из квадрата = модуль</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">1/(x-a) → x ≠ a</div>
+        <div class="cs-val">ОДЗ дробно-рациональных</div>
+      </div>
+      <div class="cs-item">
+        <div class="cs-key">ln(x) = log_e(x)</div>
+        <div class="cs-val">Натуральный логарифм, e ≈ 2.718</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subsec">Типичные ошибки (не повторяй!)</h3>
+  <ul class="mistake-list">
+    <li>
+      <div class="mistake-title">❌ Ошибка #1 — Забыли ОДЗ логарифма</div>
+      <div class="mistake-desc">log(x-2) = 0 → x-2 = 1 → x = 3. Верно! Но если ответ x = 2 — он не входит в ОДЗ (аргумент = 0).</div>
+      <div class="mistake-fix">✅ Всегда проверяй: аргумент должен быть строго больше нуля.</div>
+    </li>
+    <li>
+      <div class="mistake-title">❌ Ошибка #2 — Забыли условие g(x) ≥ 0</div>
+      <div class="mistake-desc">√(x+3) = x-1. Возвели: x+3 = x²-2x+1 → x²-3x-2 = 0 → x = (3±√17)/2. Проверка нужна!</div>
+      <div class="mistake-fix">✅ Подставь каждый корень в исходное уравнение и убедись, что правая часть ≥ 0.</div>
+    </li>
+    <li>
+      <div class="mistake-title">❌ Ошибка #3 — Делят обе части на x</div>
+      <div class="mistake-desc">x² = 5x → делим на x → x = 5. Потеряли корень x = 0!</div>
+      <div class="mistake-fix">✅ Не делить на выражение с переменной. Переноси и выноси: x²-5x = 0, x(x-5) = 0.</div>
+    </li>
+    <li>
+      <div class="mistake-title">❌ Ошибка #4 — Посторонние корни в дробных уравнениях</div>
+      <div class="mistake-desc">1/(x-2) = ... → после умножения получили x = 2. Но x = 2 обнуляет знаменатель!</div>
+      <div class="mistake-fix">✅ Проверяй найденные корни: не должны входить в исключения ОДЗ.</div>
+    </li>
+    <li>
+      <div class="mistake-title">❌ Ошибка #5 — Неверное потенцирование</div>
+      <div class="mistake-desc">log₂(x) = log₂(x+1) → x = x+1 → 0 = 1. Уравнение не имеет решений (правильно!), но ошибка: нельзя "добавлять" разные степени.</div>
+      <div class="mistake-fix">✅ Приводи логарифмы к одному основанию перед потенцированием.</div>
+    </li>
+  </ul>
+</div>
+
+<script>
+// ═══════════════════════════════════
+// DATA: ЛОГАРИФМИЧЕСКИЕ ЗАДАЧИ
+// ═══════════════════════════════════
+const logProblems = [
+  // EASY 1-7
+  {
+    n:1, diff:'easy', text:'Решите уравнение:', eq:'log₂(x) = 3',
+    steps:['log₂(x) = 3','x = 2³','x = 8','ОДЗ: x > 0, 8 > 0 ✓'],
+    answer:'x = 8'
+  },
+  {
+    n:2, diff:'easy', text:'Решите уравнение:', eq:'log₃(x) = 2',
+    steps:['log₃(x) = 2','x = 3² = 9','ОДЗ: 9 > 0 ✓'],
+    answer:'x = 9'
+  },
+  {
+    n:3, diff:'easy', text:'Решите уравнение:', eq:'lg(x) = 1   [lg = log₁₀]',
+    steps:['lg(x) = 1','x = 10¹ = 10'],
+    answer:'x = 10'
+  },
+  {
+    n:4, diff:'easy', text:'Решите уравнение:', eq:'log₅(x+1) = 2',
+    steps:['x+1 = 5² = 25','x = 24','ОДЗ: x+1 > 0 → x > -1, 24 > -1 ✓'],
+    answer:'x = 24'
+  },
+  {
+    n:5, diff:'easy', text:'Решите уравнение:', eq:'log₂(x) = log₂(5)',
+    steps:['Основания одинаковы → потенцирование','x = 5','ОДЗ: 5 > 0 ✓'],
+    answer:'x = 5'
+  },
+  {
+    n:6, diff:'easy', text:'Решите уравнение:', eq:'log₃(2x - 1) = 0',
+    steps:['2x - 1 = 3⁰ = 1','2x = 2','x = 1','ОДЗ: 2(1)-1 = 1 > 0 ✓'],
+    answer:'x = 1'
+  },
+  {
+    n:7, diff:'easy', text:'Решите уравнение:', eq:'ln(x) = 0',
+    steps:['x = e⁰ = 1'],
+    answer:'x = 1'
+  },
+  // MED 8-14
+  {
+    n:8, diff:'med', text:'Решите уравнение:', eq:'log₂(x) + log₂(x-2) = 3',
+    steps:['ОДЗ: x > 0 и x-2 > 0 → x > 2','log₂[x(x-2)] = 3','x(x-2) = 8','x² - 2x - 8 = 0','(x-4)(x+2) = 0 → x = 4 или x = -2','x = -2 не входит в ОДЗ'],
+    answer:'x = 4'
+  },
+  {
+    n:9, diff:'med', text:'Решите уравнение:', eq:'log₃(x²-4x+4) = 2',
+    steps:['x²-4x+4 = 3² = 9','x²-4x-5 = 0','(x-5)(x+1) = 0 → x = 5 или x = -1','ОДЗ: x²-4x+4 > 0, при x=5: 9 > 0 ✓, при x=-1: 9 > 0 ✓'],
+    answer:'x = 5; x = -1'
+  },
+  {
+    n:10, diff:'med', text:'Решите уравнение:', eq:'log₂(x+3) - log₂(x-1) = 2',
+    steps:['ОДЗ: x > -3 и x > 1 → x > 1','log₂[(x+3)/(x-1)] = 2','(x+3)/(x-1) = 4','x+3 = 4(x-1)','x+3 = 4x-4','3x = 7 → x = 7/3','7/3 > 1 ✓'],
+    answer:'x = 7/3'
+  },
+  {
+    n:11, diff:'med', text:'Решите уравнение:', eq:'log₅(x) = log₅(2x-3)',
+    steps:['ОДЗ: x > 0 и 2x-3 > 0 → x > 3/2','Потенцирование: x = 2x-3','x = 3','3 > 3/2 ✓'],
+    answer:'x = 3'
+  },
+  {
+    n:12, diff:'med', text:'Решите уравнение:', eq:'2·log₃(x) = log₃(4x-3)',
+    steps:['log₃(x²) = log₃(4x-3)','x² = 4x-3','x²-4x+3 = 0','(x-1)(x-3) = 0 → x=1 или x=3','ОДЗ: x>0, оба подходят','Проверка: x=1: 4(1)-3=1>0✓; x=3: 4(3)-3=9>0✓'],
+    answer:'x = 1; x = 3'
+  },
+  {
+    n:13, diff:'med', text:'Решите уравнение:', eq:'log(x+5) + log(x-2) = 1   [log = lg]',
+    steps:['ОДЗ: x > -5 и x > 2 → x > 2','log[(x+5)(x-2)] = 1','(x+5)(x-2) = 10','x²+3x-10 = 10','x²+3x-20 = 0','D = 9+80 = 89, x = (-3±√89)/2','x = (-3+√89)/2 ≈ 3.22 > 2 ✓; x = (-3-√89)/2 < 0 — не входит'],
+    answer:'x = (-3+√89)/2'
+  },
+  {
+    n:14, diff:'med', text:'Решите уравнение:', eq:'log₂(log₃(x)) = 1',
+    steps:['log₃(x) = 2¹ = 2','x = 3² = 9','ОДЗ: x > 0, log₃(x) > 0 → x > 1; 9 > 1 ✓'],
+    answer:'x = 9'
+  },
+  // HARD 15-20
+  {
+    n:15, diff:'hard', text:'Решите уравнение:', eq:'(log₂x)² - 3·log₂x + 2 = 0',
+    steps:['Замена: t = log₂(x)','t² - 3t + 2 = 0','(t-1)(t-2) = 0 → t=1 или t=2','t=1: log₂(x)=1 → x=2','t=2: log₂(x)=2 → x=4'],
+    answer:'x = 2; x = 4'
+  },
+  {
+    n:16, diff:'hard', text:'Решите уравнение:', eq:'log₂(x) · log₂(4x) = 2',
+    steps:['log₂(4x) = log₂4 + log₂x = 2 + log₂x','Пусть t = log₂(x)','t(t+2) = 2','t²+2t-2 = 0','t = (-2±√12)/2 = -1±√3','x = 2^(-1+√3) или x = 2^(-1-√3)','ОДЗ: x > 0 — оба подходят'],
+    answer:'x = 2^(√3-1); x = 2^(-√3-1)'
+  },
+  {
+    n:17, diff:'hard', text:'Решите уравнение:', eq:'log₃(x+1) + log₉(x+1) = 3/2',
+    steps:['Формула перехода: log₉(x+1) = log₃(x+1)/log₃9 = log₃(x+1)/2','Пусть t = log₃(x+1)','t + t/2 = 3/2','3t/2 = 3/2 → t = 1','log₃(x+1) = 1 → x+1 = 3 → x = 2','ОДЗ: x > -1; 2 > -1 ✓'],
+    answer:'x = 2'
+  },
+  {
+    n:18, diff:'hard', text:'Решите уравнение:', eq:'log₄(x) + log₈(x) = 5/6',
+    steps:['log₄(x) = log₂(x)/2, log₈(x) = log₂(x)/3','Пусть t = log₂(x)','t/2 + t/3 = 5/6','5t/6 = 5/6 → t = 1','log₂(x) = 1 → x = 2'],
+    answer:'x = 2'
+  },
+  {
+    n:19, diff:'hard', text:'Решите уравнение:', eq:'log₂(3x-1) = 2 + log₂(x-1)',
+    steps:['ОДЗ: 3x-1>0 → x>1/3; x-1>0 → x>1','log₂(3x-1) - log₂(x-1) = 2','log₂[(3x-1)/(x-1)] = 2','(3x-1)/(x-1) = 4','3x-1 = 4x-4','x = 3','3 > 1 ✓'],
+    answer:'x = 3'
+  },
+  {
+    n:20, diff:'hard', text:'Решите уравнение:', eq:'(log₂x)² = log₂(x⁴)',
+    steps:['(log₂x)² = 4·log₂x','Пусть t = log₂x','t² = 4t → t²-4t = 0','t(t-4) = 0 → t=0 или t=4','t=0: x = 2⁰ = 1','t=4: x = 2⁴ = 16','ОДЗ: x > 0 — оба подходят'],
+    answer:'x = 1; x = 16'
+  }
+];
+
+// ═══════════════════════════════════
+// DATA: ИРРАЦИОНАЛЬНЫЕ ЗАДАЧИ
+// ═══════════════════════════════════
+const irrProblems = [
+  // EASY 1-7
+  {n:1,diff:'easy',text:'Решите уравнение:',eq:'√x = 4',steps:['x = 4² = 16','Проверка: √16 = 4 ✓'],answer:'x = 16'},
+  {n:2,diff:'easy',text:'Решите уравнение:',eq:'√(x-3) = 2',steps:['x-3 = 4','x = 7','Проверка: √(7-3) = √4 = 2 ✓'],answer:'x = 7'},
+  {n:3,diff:'easy',text:'Решите уравнение:',eq:'√(2x+1) = 3',steps:['2x+1 = 9','2x = 8','x = 4','Проверка: √(9) = 3 ✓'],answer:'x = 4'},
+  {n:4,diff:'easy',text:'Решите уравнение:',eq:'√x = x',steps:['Условие: x ≥ 0','Возведём: x = x²','x²-x = 0 → x(x-1) = 0','x=0 или x=1','Оба ≥ 0, проверка: √0=0✓, √1=1✓'],answer:'x = 0; x = 1'},
+  {n:5,diff:'easy',text:'Решите уравнение:',eq:'∛x = 2',steps:['x = 2³ = 8','Нечётный корень: проверка не нужна'],answer:'x = 8'},
+  {n:6,diff:'easy',text:'Решите уравнение:',eq:'√(x+5) = √(3x-1)',steps:['ОДЗ: x≥-5 и 3x-1≥0 → x≥1/3','x+5 = 3x-1','6 = 2x → x = 3','Проверка: √8 = √8 ✓'],answer:'x = 3'},
+  {n:7,diff:'easy',text:'Решите уравнение:',eq:'√(5-x) = 0',steps:['5-x = 0','x = 5','ОДЗ: 5-5 = 0 ≥ 0 ✓'],answer:'x = 5'},
+  // MED 8-14
+  {n:8,diff:'med',text:'Решите уравнение:',eq:'√(x+3) = x-1',steps:['Условие: x-1 ≥ 0 → x ≥ 1','Возведём: x+3 = (x-1)²','x+3 = x²-2x+1','x²-3x-2 = 0','D=9+8=17','x = (3±√17)/2','x₁=(3+√17)/2 ≈ 3.56 ≥ 1 ✓','x₂=(3-√17)/2 ≈ -0.56 < 1 — посторонний'],answer:'x = (3+√17)/2'},
+  {n:9,diff:'med',text:'Решите уравнение:',eq:'√(x²-5x+6) = x-2',steps:['Условие: x ≥ 2','Возведём: x²-5x+6 = (x-2)²','x²-5x+6 = x²-4x+4','−5x+6 = −4x+4 → x = 2','Проверка: x=2: √0 = 0 = 2-2 ✓'],answer:'x = 2'},
+  {n:10,diff:'med',text:'Решите уравнение:',eq:'√(2x+3) + √(x-1) = 4',steps:['ОДЗ: 2x+3≥0 и x≥1 → x≥1','Изолируем: √(2x+3) = 4-√(x-1)','Условие: 4-√(x-1) ≥ 0 → x ≤ 17','Возведём: 2x+3 = 16-8√(x-1)+(x-1)','2x+3 = x+15-8√(x-1)','x-12 = -8√(x-1)','Условие: x ≤ 12','Возведём: (x-12)² = 64(x-1)','x²-24x+144 = 64x-64','x²-88x+208 = 0','D=7744-832=6912','x=(88±√6912)/2','√6912=48√3','x=(88-48√3)/2=44-24√3 ≈ 2.4','Проверка подтверждает'],answer:'x = 44 - 24√3'},
+  {n:11,diff:'med',text:'Решите уравнение:',eq:'x - √(x-1) = 3',steps:['√(x-1) = x-3','Условие: x ≥ 3','Возведём: x-1 = x²-6x+9','x²-7x+10 = 0','(x-2)(x-5) = 0 → x=2 или x=5','x=2 < 3 — лишний; x=5 ≥ 3 ✓','Проверка: 5-√4 = 5-2 = 3 ✓'],answer:'x = 5'},
+  {n:12,diff:'med',text:'Решите уравнение:',eq:'√(x+9) - √x = 1',steps:['√(x+9) = 1+√x','Возведём: x+9 = 1+2√x+x','8 = 2√x → √x = 4','x = 16','Проверка: √25-√16 = 5-4 = 1 ✓'],answer:'x = 16'},
+  {n:13,diff:'med',text:'Решите уравнение:',eq:'√(3x+1) = x+1',steps:['Условие: x ≥ -1','Возведём: 3x+1 = x²+2x+1','x²-x = 0 → x(x-1)=0','x=0 или x=1','Оба ≥ -1 ✓','Проверка: x=0: √1=1=0+1✓; x=1: √4=2=1+1✓'],answer:'x = 0; x = 1'},
+  {n:14,diff:'med',text:'Решите уравнение:',eq:'√(x²+x-2) = x',steps:['Условие: x ≥ 0','Возведём: x²+x-2 = x²','x = 2','2 ≥ 0 ✓; Проверка: √(4+2-2)=√4=2 ✓'],answer:'x = 2'},
+  // HARD 15-20
+  {n:15,diff:'hard',text:'Решите уравнение:',eq:'√x + √(x+5) + 2√(x(x+5)) = 36-2x-5',steps:['Пусть t = √x + √(x+5)','t² = x + 2√(x(x+5)) + (x+5) = 2x+5 + 2√(x(x+5))','Значит 2√(x(x+5)) = t²-(2x+5)','Исходное: t + t²-(2x+5) = 31-2x','t² + t - 2x-5 = 31-2x → t²+t = 36','t²+t-36 = 0 → t = (-1+√145)/2 ≈ 5.5','Решаем √x+√(x+5) = 5.5...'],answer:'Решение через систему'},
+  {n:15,diff:'hard',text:'Решите уравнение:',eq:'√(x-3) + √(5-x) = √(x²-8x+17)',steps:['ОДЗ: 3 ≤ x ≤ 5','Заметим: x²-8x+17 = (x-4)²+1','Возведём левую часть: (x-3)+(5-x)+2√((x-3)(5-x)) = x²-8x+17','2+2√((x-3)(5-x)) = x²-8x+17','2√((x-3)(5-x)) = x²-8x+15 = (x-3)(x-5)','Пусть u=x-3, v=5-x (u,v≥0, u+v=2)','2√(uv) = -uv → uv=0','x=3 или x=5'],answer:'x = 3; x = 5'},
+  {n:16,diff:'hard',text:'Решите уравнение:',eq:'√(x+1) + √(x+6) = √(x+2) + √(x+5)',steps:['Перегруппируем: √(x+6)-√(x+5) = √(x+2)-√(x+1)','Умножим числитель и знаменатель на сопряжённое:','1/(√(x+6)+√(x+5)) = 1/(√(x+2)+√(x+1))','√(x+6)+√(x+5) = √(x+2)+√(x+1)','Но это противоречит первому уравнению','Сложим оба: 2√(x+6)+2√(x+5) ≠ ... Проверяем x=-1:','√0+√5 = √1+√4 → √5 = 1+2 = 3? Нет','Нет решений в ОДЗ (x ≥ -1)'],answer:'Нет решений'},
+  {n:17,diff:'hard',text:'Решите уравнение:',eq:'∜(x+1) = ∜(2x-1)',steps:['Нечётная/чётная: возведём обе части в 4-ю степень','x+1 = 2x-1','x = 2','Проверка: ∜3 = ∜3 ✓'],answer:'x = 2'},
+  {n:18,diff:'hard',text:'Решите уравнение:',eq:'√(x²-1) + √(x-1) = √(x+1)',steps:['ОДЗ: x≥1 или x≤-1; правая часть: x≥-1','Итого: x ≥ 1','√(x²-1) = √((x-1)(x+1)) = √(x-1)·√(x+1)','Уравнение: √(x-1)·√(x+1) + √(x-1) = √(x+1)','√(x-1)[√(x+1)+1] = √(x+1)','Если x=1: 0·2 = √2 — нет','Если x>1: √(x-1) = √(x+1)/[√(x+1)+1]','Возведём и решим: x-1 = (x+1)/[√(x+1)+1]²','Пусть s=√(x+1): x-1=s²-2','(s²-2)(s+1)² = s²','Раскрываем...'],answer:'x = 1 (проверяем отдельно)'},
+  {n:19,diff:'hard',text:'Решите уравнение:',eq:'√(5+2√6) = √x + √y, найдите x и y целые',steps:['5+2√6 = 2+2√6+3 = (√2+√3)²','Значит √(5+2√6) = √2+√3','x=2, y=3 или x=3, y=2'],answer:'x=2, y=3'},
+  {n:20,diff:'hard',text:'Решите уравнение:',eq:'√(x+√(2x-1)) + √(x-√(2x-1)) = A, A=√2',steps:['ОДЗ: 2x-1≥0 → x≥1/2; x-√(2x-1)≥0','Возведём сумму: (x+√(2x-1))+(x-√(2x-1))+2√(x²-(2x-1)) = 2','2x + 2√(x²-2x+1) = 2','2x + 2|x-1| = 2','При x≥1: 2x+2(x-1)=2 → 4x=4 → x=1','При 1/2≤x<1: 2x+2(1-x)=2 → 2=2 (верно для всех)'],answer:'x ∈ [1/2, 1]'}
+];
+
+// ═══════════════════════════════════
+// DATA: ДРОБНО-РАЦИОНАЛЬНЫЕ ЗАДАЧИ
+// ═══════════════════════════════════
+const fracProblems = [
+  // EASY 1-7
+  {n:1,diff:'easy',text:'Решите уравнение:',eq:'1/x = 3',steps:['ОДЗ: x ≠ 0','x = 1/3','Проверка: 1/(1/3) = 3 ✓'],answer:'x = 1/3'},
+  {n:2,diff:'easy',text:'Решите уравнение:',eq:'2/x = 4',steps:['ОДЗ: x ≠ 0','2 = 4x → x = 1/2'],answer:'x = 1/2'},
+  {n:3,diff:'easy',text:'Решите уравнение:',eq:'(x+1)/(x-2) = 0',steps:['ОДЗ: x ≠ 2','Числитель = 0: x+1 = 0 → x = -1','-1 ≠ 2 ✓'],answer:'x = -1'},
+  {n:4,diff:'easy',text:'Решите уравнение:',eq:'3/(x+1) = 1',steps:['ОДЗ: x ≠ -1','3 = x+1 → x = 2','2 ≠ -1 ✓'],answer:'x = 2'},
+  {n:5,diff:'easy',text:'Решите уравнение:',eq:'x/(x-3) = 2',steps:['ОДЗ: x ≠ 3','x = 2(x-3) = 2x-6','-x = -6 → x = 6','6 ≠ 3 ✓'],answer:'x = 6'},
+  {n:6,diff:'easy',text:'Решите уравнение:',eq:'1/(x-1) = 1/(x+1)',steps:['ОДЗ: x ≠ 1 и x ≠ -1','Кросс-умножение: x+1 = x-1','1 = -1 — противоречие'],answer:'Нет решений'},
+  {n:7,diff:'easy',text:'Решите уравнение:',eq:'(2x-1)/(x+3) = 1',steps:['ОДЗ: x ≠ -3','2x-1 = x+3','x = 4','4 ≠ -3 ✓'],answer:'x = 4'},
+  // MED 8-14
+  {n:8,diff:'med',text:'Решите уравнение:',eq:'x/(x-2) + 2/(x+2) = 1',steps:['ОДЗ: x ≠ 2, x ≠ -2','НОК = (x-2)(x+2)','x(x+2) + 2(x-2) = (x-2)(x+2)','x²+2x+2x-4 = x²-4','4x-4 = -4','4x = 0 → x = 0','0 ≠ 2, 0 ≠ -2 ✓'],answer:'x = 0'},
+  {n:9,diff:'med',text:'Решите уравнение:',eq:'(x+1)/(x-1) - (x-1)/(x+1) = 8/(x²-1)',steps:['ОДЗ: x ≠ 1, x ≠ -1','НОК = (x-1)(x+1)','(x+1)² - (x-1)² = 8','(x²+2x+1)-(x²-2x+1) = 8','4x = 8 → x = 2','2 ≠ ±1 ✓'],answer:'x = 2'},
+  {n:10,diff:'med',text:'Решите уравнение:',eq:'1/(x-3) + 1/(x+3) = 1/4',steps:['ОДЗ: x ≠ ±3','(x+3+x-3)/[(x-3)(x+3)] = 1/4','2x/(x²-9) = 1/4','8x = x²-9','x²-8x-9 = 0','(x-9)(x+1) = 0 → x=9 или x=-1','Оба ≠ ±3 ✓'],answer:'x = 9; x = -1'},
+  {n:11,diff:'med',text:'Решите уравнение:',eq:'(x²-1)/(x+1) = x-2',steps:['ОДЗ: x ≠ -1','(x-1)(x+1)/(x+1) = x-2','x-1 = x-2','-1 = -2 — противоречие'],answer:'Нет решений'},
+  {n:12,diff:'med',text:'Решите уравнение:',eq:'2/(x-1) - 3/(x+2) = 1/(x²+x-2)',steps:['x²+x-2 = (x-1)(x+2)','ОДЗ: x ≠ 1, x ≠ -2','2(x+2)-3(x-1) = 1','2x+4-3x+3 = 1','-x+7 = 1 → x = 6','6 ≠ 1, 6 ≠ -2 ✓'],answer:'x = 6'},
+  {n:13,diff:'med',text:'Решите уравнение:',eq:'x²/(x²-4) - 2/(x-2) = 1',steps:['x²-4=(x-2)(x+2), ОДЗ: x≠±2','x² - 2(x+2) = (x-2)(x+2)','x²-2x-4 = x²-4','-2x = 0 → x = 0','0 ≠ ±2 ✓'],answer:'x = 0'},
+  {n:14,diff:'med',text:'Решите уравнение:',eq:'(x+2)/(x-1) = (x-1)/(x+2)',steps:['ОДЗ: x ≠ 1, x ≠ -2','Кросс-умножение: (x+2)² = (x-1)²','x²+4x+4 = x²-2x+1','6x = -3 → x = -1/2','−1/2 ≠ 1, -1/2 ≠ -2 ✓'],answer:'x = -1/2'},
+  // HARD 15-20
+  {n:15,diff:'hard',text:'Решите уравнение:',eq:'x/(x²-x+1) = 1/3',steps:['ОДЗ: x²-x+1 ≠ 0; D=1-4=-3<0 → всегда ≠0','3x = x²-x+1','x²-4x+1 = 0','x = (4±√12)/2 = 2±√3'],answer:'x = 2+√3; x = 2-√3'},
+  {n:16,diff:'hard',text:'Решите уравнение:',eq:'(x²+2x-3)/(x²-x-2) = (x-1)/(x-2)',steps:['x²+2x-3=(x+3)(x-1), x²-x-2=(x-2)(x+1)','ОДЗ: x≠2, x≠-1','(x+3)(x-1)/[(x-2)(x+1)] = (x-1)/(x-2)','Если x≠1: (x+3)/[(x+1)] = 1','x+3 = x+1 → 3=1 (невозможно)','Если x=1: проверяем: (1+2-3)/(1-1-2) = 0/(-2) = 0; (1-1)/(1-2)=0/(-1)=0. ✓'],answer:'x = 1'},
+  {n:17,diff:'hard',text:'Решите уравнение:',eq:'1/(x-1) + 1/(x-2) + 1/(x-3) = 0',steps:['ОДЗ: x≠1,2,3','НОК = (x-1)(x-2)(x-3)','(x-2)(x-3)+(x-1)(x-3)+(x-1)(x-2) = 0','(x²-5x+6)+(x²-4x+3)+(x²-3x+2) = 0','3x²-12x+11 = 0','x = (12±√(144-132))/6 = (12±√12)/6 = 2±√3/3'],answer:'x = 2+√3/3; x = 2-√3/3'},
+  {n:18,diff:'hard',text:'Решите уравнение:',eq:'(x+a)/(x-a) + (x-a)/(x+a) = 10/3  (a≠0)',steps:['ОДЗ: x≠±a','Пусть t=(x+a)/(x-a), тогда 1/t=(x-a)/(x+a)','t + 1/t = 10/3','3t²-10t+3=0','(3t-1)(t-3)=0 → t=3 или t=1/3','t=3: (x+a)/(x-a)=3 → x+a=3x-3a → 2x=4a → x=2a','t=1/3: аналогично x=-2a','x=2a≠±a✓ (a≠0); x=-2a≠±a✓'],answer:'x = 2a; x = -2a'},
+  {n:19,diff:'hard',text:'Решите уравнение:',eq:'x/(x-1) - 2x/(x²-1) = (x+3)/(x+1)',steps:['x²-1=(x-1)(x+1), ОДЗ: x≠±1','x(x+1)-2x = (x+3)(x-1)','x²+x-2x = x²-x+3x-3','x²-x = x²+2x-3','-3x = -3 → x = 1','x=1 НЕ входит в ОДЗ — посторонний корень!'],answer:'Нет решений'},
+  {n:20,diff:'hard',text:'Решите уравнение:',eq:'x⁴/(x-1) - 1/(x-1) = x³+x²+x+1',steps:['ОДЗ: x≠1','(x⁴-1)/(x-1) = x³+x²+x+1','x⁴-1=(x-1)(x³+x²+x+1)','(x-1)(x³+x²+x+1)/(x-1) = x³+x²+x+1','x³+x²+x+1 = x³+x²+x+1 — тождество!','Верно для всех x≠1'],answer:'x ∈ ℝ, x ≠ 1'}
+];
+
+// ═══════════════════════════════════
+// TESTS DATA
+// ═══════════════════════════════════
+const testLog = [
+  {q:'Чему равен log₂(8)?',opts:['2','3','4','8'],ans:1},
+  {q:'Уравнение log₃(x) = 0 имеет решение:',opts:['x = 0','x = 1','x = 3','Нет решений'],ans:1},
+  {q:'ОДЗ уравнения log(x−2) = 1:',opts:['x > 0','x > 1','x > 2','Любое x'],ans:2},
+  {q:'Решение уравнения log₂(x) = 4:',opts:['x = 2','x = 8','x = 16','x = 4'],ans:2},
+  {q:'log₅(25) равен:',opts:['5','1','2','10'],ans:2},
+  {q:'Уравнение log₂(x) + log₂(x) = 6 имеет решение:',opts:['x = 3','x = 8','x = 6','x = 4'],ans:1},
+  {q:'Формула: log_a(mn) = ?',opts:['log_a(m)·log_a(n)','log_a(m)+log_a(n)','log_a(m)-log_a(n)','log_a(m/n)'],ans:1},
+  {q:'Решение log₃(2x−1) = 2:',opts:['x = 4','x = 5','x = 10','x = 3'],ans:1},
+  {q:'log(1) для любого основания равен:',opts:['1','-1','0','Не определён'],ans:2},
+  {q:'Уравнение log₂(x²−4x+4) = 4 → x²−4x+4 = ?',opts:['4','8','16','2'],ans:2}
+];
+
+const testIrr = [
+  {q:'Решение √x = 5:',opts:['x = 5','x = 10','x = 25','x = 2.5'],ans:2},
+  {q:'ОДЗ уравнения √(x−3) = 2:',opts:['x ≥ 0','x ≥ 2','x ≥ 3','x > 3'],ans:2},
+  {q:'После возведения в квадрат уравнения √f(x)=g(x) нужно добавить условие:',opts:['f(x) ≥ 0','g(x) ≥ 0','f(x) = g(x)','g(x) > 0'],ans:1},
+  {q:'√(x+1) = x-1. Что является "посторонним" корнем?',opts:['x = 3','x = 0','x = -1','x = 2'],ans:1},
+  {q:'√4 + √9 равно:',opts:['√13','5','7','6'],ans:1},
+  {q:'Решение ∛(x) = −2:',opts:['x = −8','x = 8','x = 4','Нет решений'],ans:0},
+  {q:'√(x²) = ?',opts:['x','−x','|x|','x²'],ans:2},
+  {q:'Уравнение √(3−x) = x+1. ОДЗ:',opts:['x ≤ 3','x ≥ −1','−1 ≤ x ≤ 3','x ≥ 3'],ans:2},
+  {q:'Решение √(2x+6) = 4:',opts:['x = 5','x = 10','x = 7','x = 4'],ans:0},
+  {q:'При решении иррациональных уравнений возможны:',opts:['Только правильные корни','Посторонние корни','Потеря корней','Только целые ответы'],ans:1}
+];
+
+const testFrac = [
+  {q:'ОДЗ уравнения 1/(x−3) = 5:',opts:['x ≠ 0','x ≠ 3','x ≠ 5','x > 3'],ans:1},
+  {q:'Решение 2/x = 6:',opts:['x = 3','x = 1/3','x = 12','x = 1/6'],ans:1},
+  {q:'Уравнение (x+1)/(x-1) = 0 имеет решение:',opts:['x = 1','x = -1','x = 0','Нет решений'],ans:1},
+  {q:'Что такое "посторонний корень" в дробном уравнении?',opts:['Корень > 10','Корень, обнуляющий знаменатель','Корень < 0','Нецелый корень'],ans:1},
+  {q:'x/(x+2) = 1 — решение:',opts:['x = 2','x = -2','Нет решений','x = 0'],ans:2},
+  {q:'1/(x-1) + 1/(x+1) = 0. Решение:',opts:['x = 0','x = 1','x = -1','x = 2'],ans:0},
+  {q:'НОК знаменателей x и (x−2):',opts:['x+x-2','x(x-2)','2x','x²-2'],ans:1},
+  {q:'(2x-4)/(x-2) = 2 при x ≠ 2 равно:',opts:['2','x','0','Нет решений'],ans:3},
+  {q:'Решение (x+3)/(x-3) = 2:',opts:['x = 9','x = 6','x = 3','x = -9'],ans:0},
+  {q:'При решении дробного уравнения первый шаг — это:',opts:['Перенести всё в одну сторону','Найти ОДЗ','Умножить на знаменатель','Раскрыть скобки'],ans:1}
+];
+
+// ═══════════════════════════════════
+// RENDER FUNCTIONS
+// ═══════════════════════════════════
+function diffBadge(d) {
+  if (d==='easy') return '<span class="diff diff-easy">лёгкий</span>';
+  if (d==='med') return '<span class="diff diff-med">средний</span>';
+  return '<span class="diff diff-hard">сложный</span>';
+}
+
+function renderProblems(problems, easyId, medId, hardId) {
+  const easy = problems.filter((_,i)=>i<7);
+  const med = problems.filter((_,i)=>i>=7&&i<14);
+  const hard = problems.filter((_,i)=>i>=14);
+
+  function html(p, idx) {
+    const id = `sol-${easyId}-${idx}`;
+    return `
+    <div class="problem-card">
+      <div class="problem-top">
+        <div class="prob-num">${p.n}.</div>
+        <div class="prob-text">
+          ${p.text} ${diffBadge(p.diff)}<br>
+          <span class="eq">${p.eq}</span>
+        </div>
+        <button class="show-btn" onclick="toggleSol('${id}',this)">Решение ▾</button>
+      </div>
+      <div class="solution-box" id="${id}">
+        <div class="sol-title">Решение</div>
+        ${p.steps.map(s=>`<div class="sol-step"><span class="eq">${s}</span></div>`).join('')}
+        <div class="answer">✓ Ответ: ${p.answer}</div>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById(easyId).innerHTML = easy.map((p,i)=>html(p,i)).join('');
+  document.getElementById(medId).innerHTML = med.map((p,i)=>html(p,i+7)).join('');
+  document.getElementById(hardId).innerHTML = hard.map((p,i)=>html(p,i+14)).join('');
+}
+
+function toggleSol(id, btn) {
+  const box = document.getElementById(id);
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    btn.textContent = 'Решение ▾';
+  } else {
+    box.classList.add('open');
+    btn.textContent = 'Скрыть ▴';
+  }
+}
+
+// ═══════════════════════════════════
+// RENDER TESTS
+// ═══════════════════════════════════
+function renderTest(data, containerId, prefix) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = data.map((q,i)=>`
+    <div class="test-question" id="${prefix}-q${i}">
+      <div class="q-num">Вопрос ${i+1} из ${data.length}</div>
+      <div class="q-text">${q.q.replace(/(log[₀-₉₂₃₄₅₆₇₈₉ₐ_][\w()²³+−-]+|√[\w()⁴³+−]+|[₀-₉]+)/g,'<span class="eq">$1</span>')}</div>
+      <div class="options">
+        ${q.opts.map((o,j)=>`<button class="option" id="${prefix}-q${i}-o${j}" onclick="selectOption('${prefix}',${i},${j})">${o}</button>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+const selectedAnswers = { log:{}, irr:{}, frac:{} };
+
+function selectOption(prefix, qIdx, oIdx) {
+  const data = prefix==='log'?testLog:prefix==='irr'?testIrr:testFrac;
+  const q = data[qIdx];
+  // Deselect others
+  q.opts.forEach((_,j)=>{
+    const btn = document.getElementById(`${prefix}-q${qIdx}-o${j}`);
+    btn.classList.remove('correct-ans','wrong-ans');
+    btn.disabled = false;
+  });
+  selectedAnswers[prefix][qIdx] = oIdx;
+  const btn = document.getElementById(`${prefix}-q${qIdx}-o${oIdx}`);
+  btn.style.outline = '2px solid var(--gold)';
+  setTimeout(()=>btn.style.outline='',300);
+}
+
+function submitTest(prefix) {
+  const data = prefix==='log'?testLog:prefix==='irr'?testIrr:testFrac;
+  let correct = 0;
+  data.forEach((q,i)=>{
+    const qEl = document.getElementById(`${prefix}-q${i}`);
+    const selected = selectedAnswers[prefix][i];
+    q.opts.forEach((_,j)=>{
+      const btn = document.getElementById(`${prefix}-q${i}-o${j}`);
+      btn.disabled = true;
+      btn.style.outline = '';
+      if (j===q.ans) btn.classList.add('correct-ans');
+      else if (j===selected && j!==q.ans) btn.classList.add('wrong-ans');
+    });
+    if (selected===q.ans) { correct++; qEl.classList.add('correct'); }
+    else qEl.classList.add('wrong');
+  });
+  const scoreBox = document.getElementById(`score-${prefix}`);
+  const pct = (correct/data.length)*100;
+  document.getElementById(`score-${prefix}-num`).textContent = `${correct}/${data.length}`;
+  document.getElementById(`score-${prefix}-msg`).textContent =
+    pct===100?'🏆 Отлично! Все верно!':pct>=70?'✅ Хороший результат!':pct>=40?'📚 Неплохо, но есть пробелы.':'💡 Стоит повторить тему.';
+  document.getElementById(`score-${prefix}-bar`).style.width = pct+'%';
+  scoreBox.classList.add('show');
+}
+
+function resetTest(prefix) {
+  const data = prefix==='log'?testLog:prefix==='irr'?testIrr:testFrac;
+  selectedAnswers[prefix] = {};
+  renderTest(data, `test-${prefix}-container`, prefix);
+  document.getElementById(`score-${prefix}`).classList.remove('show');
+  document.querySelectorAll(`#sec-test-${prefix} .test-question`).forEach(q=>{
+    q.classList.remove('correct','wrong');
+  });
+}
+
+// ═══════════════════════════════════
+// NAV
+// ═══════════════════════════════════
+const sectionMap = {
+  'log':'sec-log','irr':'sec-irr','frac':'sec-frac',
+  'test-log':'sec-test-log','test-irr':'sec-test-irr','test-frac':'sec-test-frac',
+  'bonus':'sec-bonus'
+};
+
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(sectionMap[name]).classList.add('active');
+  const btns = document.querySelectorAll('.nav-btn');
+  const labels = {'log':'Логарифмические','irr':'Иррациональные','frac':'Дробно-рациональные',
+    'test-log':'Тест: Лог.','test-irr':'Тест: Ирр.','test-frac':'Тест: Дроб.','bonus':'Бонус'};
+  btns.forEach(b=>{ if(b.textContent.trim().includes(labels[name].trim())) b.classList.add('active'); });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ═══════════════════════════════════
+// INIT
+// ═══════════════════════════════════
+renderProblems(logProblems,'log-problems','log-problems-med','log-problems-hard');
+renderProblems(irrProblems,'irr-problems','irr-problems-med','irr-problems-hard');
+renderProblems(fracProblems,'frac-problems','frac-problems-med','frac-problems-hard');
+renderTest(testLog,'test-log-container','log');
+renderTest(testIrr,'test-irr-container','irr');
+renderTest(testFrac,'test-frac-container','frac');
+</script>
+</body>
+</html>
